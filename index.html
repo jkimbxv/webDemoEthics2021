@@ -12,22 +12,48 @@
 <h3>jkimbxv's week09 project</h3>
 <img src="https://farm8.staticflickr.com/7398/12459801543_e2bd5b8348.jpg" alt="">
 
-<form class="" action="index.html" method="post">
+<form>
   <label for="">Enter word here</label>
-  <input type="text" id="userInput" value="" onkeypress="pigLatin()">
+  <input type="text" id="userInput" value=""><br><br>
+  <button type="button" class="btn btn-primary" onclick="pigLatinWord()">Turn Word Into Pig Latin</button>
+</form>
+<br>
+<p id="result"></p>
+<br><br>
+<form>
+  <label for="">Enter sentence here</label>
+  <input type="text" id="userInputSent" value=""><br><br>
+  <button type="button" class="btn btn-primary" onclick="pigLatinLong()">Turn Sentence Into Pig Latin</button>
+
 </form>
 <br><br>
-<p id="result"></p>
+<p id = "sentenceResult"></p>
 <script type="text/javascript">
-  function pigLatin(){
+  function pigLatinWord(){
     var str = document.getElementById("userInput").value;
     var pLStr =""
     if (str.length <2){
       pLStr = str+"ay";
     }else{
-      pLStr= str.substring(1,str.length+1)+str[0]+"ay";
+      pLStr= str.substring(1)+str[0]+"ay";
     }
     document.getElementById("result").innerHTML = pLStr;
+    return pLStr;
+  }
+
+  function pigLatinLong(){
+    var str = document.getElementById("userInputSent").value;
+    var pLStr ="";
+    var currStr = "";
+    for (var i = 0; i<str.length;i++){
+      if(str[i]==" " || i==str.length-1){ //keeps track of word. if end of word, turn into piglatin
+        pLStr += currStr.substring(1)+currStr[0]+"ay ";
+        currStr =""; //clear currStr
+      }else{
+        currStr += str[i]; //if not space, then add to current word
+      }
+    }
+    document.getElementById("sentenceResult").innerHTML = pLStr;
     return pLStr;
   }
 </script>
